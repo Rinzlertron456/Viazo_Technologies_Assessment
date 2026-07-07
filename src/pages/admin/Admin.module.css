@@ -1,0 +1,250 @@
+/* Admin Module - Cartoon Brutalist Style */
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.pageTitle {
+  font-size: 2.5rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  margin-bottom: 2rem;
+  padding: 1rem 1.5rem;
+  background: #fff;
+  border: 4px solid #000;
+  border-radius: 0.75rem;
+  box-shadow: 6px 6px 0 #000;
+  display: inline-block;
+  letter-spacing: 1px;
+}
+
+/* Toolbar */
+.toolbar {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.searchInput {
+  padding: 0.6rem 1rem;
+  border: 3px solid #000;
+  border-radius: 0.5rem;
+  font-size: 0.9rem;
+  font-family: inherit;
+  box-shadow: 4px 4px 0 #000;
+  outline: none;
+  min-width: 250px;
+  background: #fff;
+}
+
+.searchInput:focus {
+  background: #fffbeb;
+  transform: translate(-1px, -1px);
+  box-shadow: 6px 6px 0 #000;
+}
+
+/* Table */
+.tableWrapper {
+  overflow-x: auto;
+  border: 4px solid #000;
+  border-radius: 0.75rem;
+  box-shadow: 8px 8px 0 #000;
+  background: #fff;
+  margin-bottom: 2rem;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.table th {
+  padding: 1rem;
+  background: #000;
+  color: #fff;
+  font-weight: 800;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 1px;
+  border-bottom: 2px solid #000;
+}
+
+.table td {
+  padding: 0.85rem 1rem;
+  border-bottom: 2px solid #e0e0e0;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.table tbody tr:hover {
+  background: #f9f9f9;
+}
+
+.table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* Status Badges */
+.statusBadge {
+  display: inline-block;
+  padding: 0.3rem 0.6rem;
+  border: 2px solid #000;
+  border-radius: 0.5rem;
+  font-weight: 700;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.statusActive {
+  background: #d4edda;
+  color: #155724;
+}
+
+.statusInactive {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+.statusScheduled {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.statusCompleted {
+  background: #d4edda;
+  color: #155724;
+}
+
+.statusCancelled {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+.statusPaid {
+  background: #d4edda;
+  color: #155724;
+}
+
+.statusUnpaid {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.statusPending {
+  background: #e2e3e5;
+  color: #383d41;
+}
+
+/* Inline Add Form */
+.formCard {
+  max-width: 500px;
+  background: #fff;
+  border: 4px solid #000;
+  border-radius: 0.75rem;
+  padding: 2rem;
+  box-shadow: 8px 8px 0 #000;
+  margin-bottom: 2rem;
+}
+
+.formGroup {
+  margin-bottom: 1.25rem;
+}
+
+.formLabel {
+  display: block;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.5px;
+  font-size: 0.8rem;
+}
+
+.formInput {
+  width: 100%;
+  padding: 0.7rem 1rem;
+  border: 3px solid #000;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  font-family: inherit;
+  background: #fff;
+  box-shadow: 4px 4px 0 #000;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.formInput:focus {
+  background: #fffbeb;
+  transform: translate(-1px, -1px);
+  box-shadow: 6px 6px 0 #000;
+}
+
+.formSelect {
+  width: 100%;
+  padding: 0.7rem 1rem;
+  border: 3px solid #000;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  font-family: inherit;
+  background: #fff;
+  box-shadow: 4px 4px 0 #000;
+  cursor: pointer;
+  outline: none;
+  box-sizing: border-box;
+  appearance: none;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3'><polyline points='6 9 12 15 18 9'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 1.2rem;
+}
+
+.formSelect:focus {
+  background-color: #fffbeb;
+  transform: translate(-1px, -1px);
+  box-shadow: 6px 6px 0 #000;
+}
+
+.formActions {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.successMessage {
+  background: #d4edda;
+  border: 3px solid #155724;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #155724;
+}
+
+.errorMessage {
+  background: #f8d7da;
+  border: 3px solid #721c24;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #721c24;
+}
+
+.loadingMessage {
+  text-align: center;
+  font-weight: 700;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  padding: 2rem;
+  background: #fff;
+  border: 3px solid #000;
+  border-radius: 0.75rem;
+  box-shadow: 6px 6px 0 #000;
+}

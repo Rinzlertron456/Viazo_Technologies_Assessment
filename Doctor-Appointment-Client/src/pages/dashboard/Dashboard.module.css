@@ -1,0 +1,136 @@
+.container {
+  min-height: 100vh;
+  background: #f8f9fa;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  background: #fff;
+  border-bottom: 3px solid #1a1a1a;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #1a1a1a;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: -0.5px;
+}
+
+.userInfo {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.role {
+  background: #1a1a1a;
+  color: #fff;
+  padding: 0.25rem 0.75rem;
+  border-radius: 0.25rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.name {
+  font-weight: 600;
+  color: #333;
+}
+
+.main {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.greeting {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #1a1a1a;
+  margin: 0 0 0.25rem;
+}
+
+.roleTag {
+  color: #666;
+  font-size: 0.9rem;
+  margin: 0 0 2rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.card {
+  padding: 1.5rem;
+  background: #fff;
+  border: 2px solid #1a1a1a;
+  border-radius: 0.75rem;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  cursor: pointer;
+  box-shadow: 4px 4px 0 #1a1a1a;
+  transition: all 0.15s ease;
+  text-align: left;
+}
+
+.card:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 #1a1a1a;
+}
+
+.statsSection {
+  margin-top: 1rem;
+}
+
+.sectionTitle {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: #1a1a1a;
+  margin: 0 0 1rem;
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 1rem;
+}
+
+.statCard {
+  padding: 1.25rem;
+  background: #fff;
+  border: 2px solid #1a1a1a;
+  border-radius: 0.75rem;
+  box-shadow: 4px 4px 0 #1a1a1a;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.statValue {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: #1a1a1a;
+  line-height: 1;
+}
+
+.statLabel {
+  font-size: 0.8rem;
+  color: #666;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.loadingText {
+  color: #666;
+  font-size: 0.95rem;
+}
