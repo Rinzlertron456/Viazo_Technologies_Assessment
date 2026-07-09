@@ -6,6 +6,11 @@ const COOKIE_OPTIONS = {
   secure: env.NODE_ENV === "production",
   sameSite: env.NODE_ENV === "production" ? "none" : "lax",
   path: "/",
+  // CHIPS: partitioned cookies are allowed by Chrome even when third-party
+  // cookies are blocked, so cross-site auth works in every browser (Edge,
+  // Chrome, Safari) without relying on the third-party cookie exception.
+  // Partitioned requires Secure, so only enable it in production (HTTPS).
+  partitioned: env.NODE_ENV === "production",
 } as const;
 
 export function setAccessTokenCookie(res: Response, token: string): void {
