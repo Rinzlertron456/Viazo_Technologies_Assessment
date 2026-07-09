@@ -11,6 +11,8 @@ declare global {
             callback: (response: { credential: string }) => void;
             auto_select?: boolean;
             cancel_on_tap_outside?: boolean;
+            use_fedcm_for_prompt?: boolean;
+            itp_support?: boolean;
           }) => void;
           renderButton: (
             element: HTMLElement | null,
@@ -81,6 +83,8 @@ export function GoogleSignIn({
         callback: handleCredentialResponse,
         auto_select: false,
         cancel_on_tap_outside: true,
+        use_fedcm_for_prompt: true,
+        itp_support: true,
       });
 
       window.google.accounts.id.renderButton(btnRef.current, {
