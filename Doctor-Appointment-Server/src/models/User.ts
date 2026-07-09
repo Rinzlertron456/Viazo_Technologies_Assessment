@@ -64,7 +64,6 @@ const userSchema = new Schema<IUser>(
     },
     phone: {
       type: String,
-      required: [true, "Phone number is required"],
       trim: true,
     },
     customId: {

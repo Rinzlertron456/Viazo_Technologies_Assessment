@@ -40,9 +40,18 @@ MONGODB_URI="mongodb+srv://lodestone1919_db_user:1s613pikjK0UY25P@fullstackapp.p
 # served from, otherwise the backend CORS whitelist blocks every API call.
 CLIENT_URL="https://medibook-gilt-woad.vercel.app"
 
-# Auto-generated JWT secrets (32 hex bytes each)
-JWT_ACCESS_SECRET="$(openssl rand -hex 32)"
-JWT_REFRESH_SECRET="$(openssl rand -hex 32)"
+# JWT secrets — reuse the ones already deployed to Cloud Run so that
+# regenerating them on every deploy doesn't log every user out. Fall back to
+# generating new ones only on the very first deploy (service not yet created).
+EXISTING_ENV=$(gcloud run services describe "${SERVICE_NAME}" \
+  --platform managed --region "${GCP_REGION}" \
+  --format 'value(spec.template.containers[0].env)' 2>/dev/null || true)
+JWT_ACCESS_SECRET=$(printf '%s\n' "$EXISTING_ENV" | awk -F= '/^JWT_ACCESS_SECRET=/{print $2; exit}')
+JWT_REFRESH_SECRET=$(printf '%s\n' "$EXISTING_ENV" | awk -F= '/^JWT_REFRESH_SECRET=/{print $2; exit}')
+if [ -z "${JWT_ACCESS_SECRET}" ] || [ -z "${JWT_REFRESH_SECRET}" ]; then
+  JWT_ACCESS_SECRET="$(openssl rand -hex 32)"
+  JWT_REFRESH_SECRET="$(openssl rand -hex 32)"
+fi
 JWT_ACCESS_EXPIRY="15m"
 JWT_REFRESH_EXPIRY="7d"
 
