@@ -9,7 +9,7 @@ import styles from "./Auth.module.css";
 
 export function Login() {
   const navigate = useNavigate();
-  const { login, isAuthenticated, isLoading: authLoading } = useAuth();
+  const { login, googleLogin, isAuthenticated, isLoading: authLoading } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -186,6 +186,7 @@ export function Login() {
         </div>
 
         <GoogleSignIn
+          onCredential={googleLogin}
           onSuccess={() => navigate("/dashboard")}
           onError={(msg) => setError(msg)}
         />

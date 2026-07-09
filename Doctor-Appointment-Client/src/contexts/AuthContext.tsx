@@ -21,6 +21,7 @@ import { api } from "../services/api";
 interface AuthContextValue extends AuthState {
   login: (payload: LoginPayload) => Promise<void>;
   register: (payload: RegisterPayload) => Promise<void>;
+  googleLogin: (credential: string) => Promise<void>;
   logout: () => Promise<void>;
   forgotPassword: (
     payload: ForgotPasswordPayload,
@@ -148,6 +149,28 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   }, []);
 
+  const googleLogin = useCallback(async (credential: string) => {
+    dispatch({ type: "AUTH_START" });
+    try {
+      const response = await api.post<ApiResponse<{ user: User }>>(
+        "/auth/google",
+        { credential },
+      );
+      if (response.success && response.data) {
+        dispatch({
+          type: "AUTH_SUCCESS",
+          user: response.data.user,
+          accessToken: null,
+        });
+      } else {
+        dispatch({ type: "AUTH_FAILURE" });
+      }
+    } catch (err) {
+      dispatch({ type: "AUTH_FAILURE" });
+      throw err;
+    }
+  }, []);
+
   const logout = useCallback(async () => {
     try {
       await api.post("/auth/logout");
@@ -184,6 +207,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     ...state,
     login,
     register,
+    googleLogin,
     logout,
     forgotPassword,
     resetPassword,

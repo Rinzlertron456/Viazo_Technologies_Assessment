@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from "react";
-import { api } from "../services/api";
 
 declare global {
   interface Window {
@@ -31,12 +30,14 @@ declare global {
 }
 
 interface GoogleSignInProps {
+  onCredential: (credential: string) => Promise<void>;
   onSuccess: () => void;
   onError: (message: string) => void;
   loading?: boolean;
 }
 
 export function GoogleSignIn({
+  onCredential,
   onSuccess,
   onError,
   loading,
@@ -98,25 +99,8 @@ export function GoogleSignIn({
 
     async function handleCredentialResponse(response: { credential: string }) {
       try {
-        const res = await api.post<{
-          success: boolean;
-          message: string;
-          data?: {
-            user: {
-              id: string;
-              email: string;
-              role: string;
-              firstName: string;
-              lastName: string;
-            };
-          };
-        }>("/auth/google", { credential: response.credential });
-
-        if (res.success && res.data) {
-          onSuccess();
-        } else {
-          onError(res.message || "Google sign-in failed");
-        }
+        await onCredential(response.credential);
+        onSuccess();
       } catch (error) {
         const message =
           error instanceof Error && error.message
@@ -125,7 +109,7 @@ export function GoogleSignIn({
         onError(message);
       }
     }
-  }, [clientId, isConfigured, onSuccess, onError]);
+  }, [clientId, isConfigured, onCredential, onSuccess, onError]);
 
   const handleButtonClick = () => {
     if (!isConfigured) {
