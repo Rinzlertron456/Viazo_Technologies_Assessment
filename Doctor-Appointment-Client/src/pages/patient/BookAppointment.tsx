@@ -3,7 +3,11 @@ import { useParams, useNavigate } from "react-router-dom";
 import { Button } from "../../components/Button";
 import { FieldError } from "../../components/FieldError";
 import { api, getErrorMessage } from "../../services/api";
-import { isNonEmpty, maxLength, isFutureOrTodayDate } from "../../utils/validation";
+import {
+  isNonEmpty,
+  maxLength,
+  isFutureOrTodayDate,
+} from "../../utils/validation";
 import styles from "./Patient.module.css";
 
 export function BookAppointment() {
@@ -20,6 +24,7 @@ export function BookAppointment() {
   const [type, setType] = useState("Clinic");
   const [reportFile, setReportFile] = useState<File | null>(null);
   const [uploadedUrl, setUploadedUrl] = useState("");
+  const [uploading, setUploading] = useState(false);
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
   const [step, setStep] = useState<"form" | "payment" | "success">("form");
@@ -65,19 +70,39 @@ export function BookAppointment() {
       return;
     }
     setError("");
-    setReportFile(file);
+    setReportFile(null);
+    setUploadedUrl("");
+    setUploading(true);
+
+    const baseUrl = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
     const formData = new FormData();
     formData.append("file", file);
+
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 30000);
+
     try {
-      const res = await fetch("/api/upload", {
+      const res = await fetch(`${baseUrl}/upload`, {
         method: "POST",
         credentials: "include",
         body: formData,
+        signal: controller.signal,
       });
       const json = await res.json();
-      if (json.success) setUploadedUrl(json.data.url);
-    } catch {
-      setError("Upload failed");
+      if (json.success) {
+        setUploadedUrl(json.data.url);
+        setReportFile(file);
+        setError("");
+      }
+    } catch (err) {
+      if ((err as Error)?.name === "AbortError") {
+        setError("Upload timed out. Please try again.");
+      } else {
+        setError("Upload failed");
+      }
+    } finally {
+      clearTimeout(timer);
+      setUploading(false);
     }
   }
 
@@ -263,18 +288,18 @@ export function BookAppointment() {
         </div>
         <div className={styles.formGroup}>
           <label className={styles.formLabel}>Reason *</label>
-            <textarea
-              id="reason"
-              className={styles.formTextarea}
-              value={reason}
-              onChange={(e) => {
-                setReason(e.target.value);
-                if (reasonError) setReasonError("");
-              }}
-              placeholder="Brief reason for visit..."
-              aria-invalid={!!reasonError}
-            />
-            <FieldError message={reasonError} />
+          <textarea
+            id="reason"
+            className={styles.formTextarea}
+            value={reason}
+            onChange={(e) => {
+              setReason(e.target.value);
+              if (reasonError) setReasonError("");
+            }}
+            placeholder="Brief reason for visit..."
+            aria-invalid={!!reasonError}
+          />
+          <FieldError message={reasonError} />
         </div>
         <div className={styles.formGroup}>
           <label className={styles.formLabel}>Upload Reports (optional)</label>

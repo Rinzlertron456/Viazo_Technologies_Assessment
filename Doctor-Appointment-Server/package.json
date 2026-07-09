@@ -13,6 +13,7 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "@google-cloud/storage": "^7.15.2",
     "@types/multer": "^2.2.0",
     "@types/nodemailer": "^8.0.1",
     "@types/pdfkit": "^0.17.6",

@@ -35,7 +35,7 @@ export function ResetPassword() {
     if (!isNonEmpty(token)) newErrors.token = 'Reset token is required.';
     if (!isPasswordStrong(password))
       newErrors.password =
-        'Password must be at least 8 characters and include uppercase, lowercase, and a number.';
+        'Password must be at least 8 characters and include uppercase, lowercase, a number, and a special character (no repeated characters).';
     setErrors(newErrors);
     if (Object.keys(newErrors).length > 0) return;
 

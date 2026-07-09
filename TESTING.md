@@ -16,7 +16,7 @@ Playwright happy-path script (`./Doctor-Appointment-Client/e2e/happy-path.spec.t
 | --- | --- |
 | Email | `name@test.com` |
 | Phone | 10–15 digits, optional leading `+` → `+919876543210` |
-| Password | ≥8 chars, upper + lower + digit → `Test@123` |
+| Password | ≥8 chars, upper + lower + digit + special character, no repeated (consecutive) characters → `Test@123` |
 | Required text | non-empty, reason ≤500 chars, review comment ≤1000 chars |
 | Date (book / slot / reschedule) | today or future |
 | Slot | end time strictly after start; `maxPatients ≥ 1` |
@@ -54,7 +54,7 @@ redirect to `/dashboard`.
 
 - **Expected:** success → redirect to `/dashboard`.
 - **Negative:** re-register the same email → friendly error shown, **no white screen** (fixed).
-- **Negative:** weak password → inline red error.
+- **Negative:** weak password (e.g. missing special character or with repeated characters) → inline red error.
 
 ### TC-AUTH-02 — Login — `/login`
 

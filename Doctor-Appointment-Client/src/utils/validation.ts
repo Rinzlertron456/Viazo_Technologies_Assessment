@@ -32,7 +32,9 @@ export function isPasswordStrong(value: string): boolean {
     value.length >= 8 &&
     /[a-z]/.test(value) &&
     /[A-Z]/.test(value) &&
-    /[0-9]/.test(value)
+    /[0-9]/.test(value) &&
+    /[^A-Za-z0-9]/.test(value) &&
+    !/(.)\1/.test(value)
   );
 }
 

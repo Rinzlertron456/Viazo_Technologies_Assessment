@@ -50,7 +50,7 @@ export function Register() {
     if (!isPhone(formData.phone)) e.phone = getPhoneError(formData.phone) || "Enter a valid phone number.";
     if (!isPasswordStrong(formData.password))
       e.password =
-        "Password must be at least 8 characters and include uppercase, lowercase, and a number.";
+        "Password must be at least 8 characters and include uppercase, lowercase, a number, and a special character (no repeated characters).";
     return e;
   }
 

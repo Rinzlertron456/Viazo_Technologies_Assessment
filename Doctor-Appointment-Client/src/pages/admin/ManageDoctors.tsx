@@ -85,7 +85,7 @@ export function ManageDoctors() {
     if (!isEmail(form.email)) e.email = "Enter a valid email address.";
     if (!isPasswordStrong(form.password))
       e.password =
-        "Password must be at least 8 characters and include uppercase, lowercase, and a number.";
+        "Password must be at least 8 characters and include uppercase, lowercase, a number, and a special character (no repeated characters).";
     if (!isNonEmpty(form.specialization))
       e.specialization = "Specialization is required.";
     if (!isPhone(form.phone)) e.phone = "Enter a valid phone number.";

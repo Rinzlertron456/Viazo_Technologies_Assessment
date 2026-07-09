@@ -1,0 +1,4 @@
+{
+  "name": "medibook",
+  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
+}

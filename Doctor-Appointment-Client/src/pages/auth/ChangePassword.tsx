@@ -26,7 +26,7 @@ export function ChangePassword() {
     if (!isNonEmpty(currentPassword)) newErrors.currentPassword = 'Current password is required.';
     if (!isPasswordStrong(newPassword))
       newErrors.newPassword =
-        'New password must be at least 8 characters and include uppercase, lowercase, and a number.';
+        'New password must be at least 8 characters and include uppercase, lowercase, a number, and a special character (no repeated characters).';
     if (newPassword !== confirmPassword) newErrors.confirmPassword = 'New passwords do not match';
     setErrors(newErrors);
     if (Object.keys(newErrors).length > 0) return;

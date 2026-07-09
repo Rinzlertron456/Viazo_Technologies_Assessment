@@ -23,4 +23,6 @@ export const env = {
     process.env.RECAPTCHA_ENABLED === "true" ||
     Boolean(process.env.RECAPTCHA_SECRET),
   RECAPTCHA_SECRET: process.env.RECAPTCHA_SECRET || "",
+  GCS_BUCKET_NAME: process.env.GCS_BUCKET_NAME || "",
+  GCP_PROJECT_ID: process.env.GCP_PROJECT_ID || "",
 } as const;

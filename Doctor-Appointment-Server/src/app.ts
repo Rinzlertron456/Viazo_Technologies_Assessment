@@ -25,6 +25,9 @@ import path from "path";
 
 const app = express();
 
+// Trust proxy — required for express-rate-limit behind Cloud Run's load balancer
+app.set('trust proxy', true);
+
 // Security headers
 app.use(
   helmet({
@@ -66,6 +69,7 @@ const limiter = rateLimit({
   max: 100,
   standardHeaders: true,
   legacyHeaders: false,
+  validate: false,
   message: {
     success: false,
     message: "Too many requests, please try again later.",
@@ -79,6 +83,7 @@ const authLimiter = rateLimit({
   max: 10,
   standardHeaders: true,
   legacyHeaders: false,
+  validate: false,
   message: {
     success: false,
     message: "Too many login/register attempts, please try again later.",
