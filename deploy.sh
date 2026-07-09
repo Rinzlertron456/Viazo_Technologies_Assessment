@@ -35,7 +35,7 @@ IMAGE_NAME="${GCP_REGION}-docker.pkg.dev/${GCP_PROJECT_ID}/${ARTIFACT_REPO_NAME}
 MONGODB_URI="mongodb+srv://lodestone1919_db_user:1s613pikjK0UY25P@fullstackapp.ph7hpv7.mongodb.net/?appName=FullStackApp"
 
 # After deploy, replace with your actual Vercel domain:
-CLIENT_URL="https://medibook-gilt-woad.vercel.app"
+CLIENT_URL="https://medibook-gilt.vercel.app"
 
 # Auto-generated JWT secrets (32 hex bytes each)
 JWT_ACCESS_SECRET="$(openssl rand -hex 32)"
