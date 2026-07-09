@@ -35,7 +35,7 @@ IMAGE_NAME="${GCP_REGION}-docker.pkg.dev/${GCP_PROJECT_ID}/${ARTIFACT_REPO_NAME}
 MONGODB_URI="mongodb+srv://lodestone1919_db_user:1s613pikjK0UY25P@fullstackapp.ph7hpv7.mongodb.net/?appName=FullStackApp"
 
 # After deploy, replace with your actual Vercel domain:
-CLIENT_URL="https://medibook-gilt.vercel.app"
+CLIENT_URL="https://medibook-gilt-woad.vercel.app"
 
 # Auto-generated JWT secrets (32 hex bytes each)
 JWT_ACCESS_SECRET="$(openssl rand -hex 32)"
@@ -244,7 +244,7 @@ echo "╔═══════════════════════�
 echo "║  ✅ DEPLOYMENT COMPLETE                                      ║"
 echo "╚═══════════════════════════════════════════════════════════════╝"
 echo ""
-echo "   Frontend : https://medibook.vercel.app"
+echo "   Frontend : https://medibook-gilt-woad.vercel.app"
 echo "   Backend  : ${API_URL}"
 echo "   Health   : ${API_URL}/api/health"
 echo ""
@@ -261,9 +261,9 @@ echo ""
 echo "   [ ] 2. Configure Google OAuth for 'Sign in with Google'"
 echo "         → https://console.cloud.google.com/apis/credentials"
 echo "         → Add these to Authorized JavaScript origins:"
-echo "             • https://medibook.vercel.app"
+echo "             • https://medibook-gilt-woad.vercel.app"
 echo "         → Add to redirect URIs:"
-echo "             • https://medibook.vercel.app/login"
+echo "             • https://medibook-gilt-woad.vercel.app/login"
 echo "         → Then re-run: gcloud run deploy ${SERVICE_NAME} \\"
 echo "             --set-env-vars \"GOOGLE_CLIENT_ID=your-id\""
 echo ""
