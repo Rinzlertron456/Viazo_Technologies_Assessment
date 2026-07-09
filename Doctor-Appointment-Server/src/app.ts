@@ -54,12 +54,41 @@ app.use(
 );
 
 // CORS
+// Allow the configured client URL, localhost (dev), any explicitly listed
+// origin, and ANY Vercel deployment of this app (production + previews). The
+// live frontend is served from a *.vercel.app domain that differs from
+// CLIENT_URL, so hard-coding a single origin previously blocked every API
+// call (CORS error, stats not loading, Google auth failing).
+const allowedOrigins = new Set<string>(
+  [
+    "http://localhost:5173",
+    env.CLIENT_URL,
+    ...(process.env.CORS_ALLOWED_ORIGINS
+      ? process.env.CORS_ALLOWED_ORIGINS.split(",").map((o) => o.trim())
+      : []),
+  ].filter(Boolean) as string[],
+);
+
+const isOriginAllowed = (origin: string | undefined): boolean => {
+  if (!origin) return false;
+  if (allowedOrigins.has(origin)) return true;
+  // Accept any Vercel deployment of this project (e.g. medibook-gilt-woad.vercel.app
+  // and preview deploys), so the frontend is never CORS-blocked.
+  return /^https:\/\/([\w-]+\.)*vercel\.app$/.test(origin);
+};
+
 app.use(
   cors({
-    origin: env.CLIENT_URL,
+    origin: (origin, callback) => {
+      // Requests without an Origin header (curl, health checks, server-to-server)
+      // are permitted.
+      if (!origin) return callback(null, true);
+      if (isOriginAllowed(origin)) return callback(null, true);
+      callback(null, false);
+    },
     credentials: true,
-    methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
-    allowedHeaders: ["Content-Type"],
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
   }),
 );
 

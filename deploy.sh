@@ -35,7 +35,10 @@ IMAGE_NAME="${GCP_REGION}-docker.pkg.dev/${GCP_PROJECT_ID}/${ARTIFACT_REPO_NAME}
 MONGODB_URI="mongodb+srv://lodestone1919_db_user:1s613pikjK0UY25P@fullstackapp.ph7hpv7.mongodb.net/?appName=FullStackApp"
 
 # After deploy, replace with your actual Vercel domain:
-CLIENT_URL="https://medibook-gilt.vercel.app"
+# NOTE: The Vercel project 'medibook-gilt' is served from the randomly-suffixed
+# *.vercel.app domain below. This MUST match the domain the frontend is actually
+# served from, otherwise the backend CORS whitelist blocks every API call.
+CLIENT_URL="https://medibook-gilt-woad.vercel.app"
 
 # Auto-generated JWT secrets (32 hex bytes each)
 JWT_ACCESS_SECRET="$(openssl rand -hex 32)"
@@ -225,14 +228,20 @@ echo "╚═══════════════════════�
 
 cd Doctor-Appointment-Client
 
-# Set VITE_API_URL as a Vercel environment variable (production only)
-npx vercel env add VITE_API_URL production <<< "${API_URL}/api" 2>/dev/null || \
-  echo "→ VITE_API_URL already set or skipped"
+# Deploy to production, injecting the Vite build-time env vars directly.
+# VITE_* vars must exist at BUILD time, so we pass them via -b.
+# (Using `vercel env add` triggers an interactive prompt + a git-branch/target
+#  conflict in newer CLI versions, so we avoid it here.)
+#   - VITE_API_URL          -> backend API (Cloud Run)
+#   - VITE_GOOGLE_CLIENT_ID -> MUST match the backend GOOGLE_CLIENT_ID so the
+#     server can verify the Google credential. This exact origin must also be
+#     listed under "Authorized JavaScript origins" in the Google Cloud OAuth
+#     client (see checklist below).
+npx vercel --name medibook --prod --yes \
+  -b "VITE_API_URL=${API_URL}/api" \
+  -b "VITE_GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID}"
 
-# Deploy to production with explicit project name (the folder name "Doctor-Appointment-Client"
-# can contain invalid characters for Vercel, so we override it)
-npx vercel --name medibook --prod --yes 2>/dev/null || \
-  npx vercel --prod --yes
+cd ..
 
 cd ..
 
