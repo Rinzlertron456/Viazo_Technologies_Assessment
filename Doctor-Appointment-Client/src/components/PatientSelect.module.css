@@ -1,0 +1,147 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  position: relative;
+}
+
+.label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.req {
+  color: #dc2626;
+}
+
+.control {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.6rem 0.75rem;
+  border: 2px solid #cbd5e1;
+  border-radius: 0.5rem;
+  background: #fff;
+  cursor: pointer;
+  font-size: 0.95rem;
+  color: #0f172a;
+  text-align: left;
+}
+
+.control:focus {
+  border-color: #0284c7;
+  outline: none;
+}
+
+.controlError {
+  border-color: #ef4444;
+}
+
+.value {
+  font-weight: 500;
+}
+
+.placeholder {
+  color: #94a3b8;
+}
+
+.chevron {
+  color: #64748b;
+  flex-shrink: 0;
+}
+
+/* Dropdown opens up or down depending on available space */
+.dropdown {
+  position: absolute;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  background: #fff;
+  border: 2px solid #cbd5e1;
+  border-radius: 0.5rem;
+  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.18);
+  overflow: hidden;
+}
+
+.dropdownUp {
+  bottom: calc(100% + 0.4rem);
+}
+
+.dropdownDown {
+  top: calc(100% + 0.4rem);
+}
+
+.searchBox {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem 0.6rem;
+  border-bottom: 1px solid #e2e8f0;
+  color: #64748b;
+}
+
+.searchInput {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 0.9rem;
+  background: transparent;
+  color: #0f172a;
+}
+
+.list {
+  max-height: 240px;
+  overflow-y: auto;
+}
+
+.option {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.5rem 0.6rem;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  text-align: left;
+  font-size: 0.9rem;
+  color: #0f172a;
+}
+
+.option:hover {
+  background: #f1f5f9;
+}
+
+.optionActive {
+  background: #e0f2fe;
+}
+
+.optionName {
+  flex: 1;
+}
+
+.optionId {
+  color: #64748b;
+  font-variant-numeric: tabular-nums;
+  font-size: 0.8rem;
+}
+
+.check {
+  color: #0284c7;
+}
+
+.noResult {
+  padding: 0.75rem 0.6rem;
+  color: #94a3b8;
+  font-size: 0.85rem;
+  text-align: center;
+}
+
+.error {
+  color: #ef4444;
+  font-size: 0.75rem;
+  margin: 0.1rem 0 0;
+}
