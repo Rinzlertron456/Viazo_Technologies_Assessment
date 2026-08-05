@@ -1,5 +1,3 @@
-# Viazo Technologies Assessment
-
 A full-stack **doctor appointment management system** built with **React, TypeScript, Express, MongoDB, and Socket.IO**. The application is organized as a client/server monorepo and supports role-based workflows for **Patients, Doctors, Receptionists, Admins, and Super Admins**.
 
 ## Live Demo
@@ -172,10 +170,3 @@ The backend is split into modular route groups:
 - The frontend uses protected routes to separate access by role.
 - Uploads are served statically from the `/uploads` path.
 - The client keeps the access token in `localStorage` and retries requests after token refresh.
-
-## Resume Project Summary
-
-- Built a full-stack doctor appointment platform with separate flows for patients, doctors, receptionists, and admins.
-- Implemented secure authentication and role-based authorization using JWT, bcrypt, cookies, and protected routes.
-- Developed appointment, queue, billing, review, medical record, and reporting modules across the client and server.
-- Added backend support for uploads, payment verification, rate limiting, and real-time communication with Socket.IO.
